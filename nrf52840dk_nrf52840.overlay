@@ -10,20 +10,10 @@
 
 // For more help, browse the DeviceTree documentation at https: //docs.zephyrproject.org/latest/guides/dts/index.html
 // You can also visit the nRF DeviceTree extension documentation at https: //docs.nordicsemi.com/bundle/nrf-connect-vscode/page/guides/ncs_configure_app.html#devicetree-support-in-the-extension
-/ {
-    pwmleds {
-        compatible = "pwm-leds";
-
-        pwm_led0: pwm_led_0 {
-            pwms = <&pwm0 0 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
-        };
-    };
-
-    aliases {
-        pwm-led0 = &pwm_led0;
-    };
+&pwm0 {
+    status = "okay";
 };
 
-&pwm0 {
+&adc {
     status = "okay";
 };

@@ -1,23 +1,18 @@
 #include <zephyr/drivers/gpio.h>
 
 #include "interruption_hal.h"
+#include "buttons_hal.h"
 
 static struct gpio_callback callback_data[10];
 
-void hal_setup_interruption(struct gpio_dt_spec* button_spec, interruption_func_ptr func)
+void hal_interruption_init() {}
+
+void hal_setup_interruption(int id, interruption_func_ptr func)
 {
-    int i = 0;
-    for (; i < 10; i++) {
-        if (callback_data[i].handler == NULL)
-            break;
-    }
-
-    i--;
-
-    config_button_interruption_function(button_spec, func, &(callback_data[i]));
+    hal_configure_button_interruption(&(buttons[id]), func, &(callback_data[id]));
 }
 
-void config_button_interruption_function(struct gpio_dt_spec* button, interruption_func_ptr func, struct gpio_callback* callback_data)
+void hal_configure_button_interruption(struct gpio_dt_spec* button, interruption_func_ptr func, struct gpio_callback* callback_data)
 {
     int ret;
     ret = gpio_pin_configure_dt(button, GPIO_INPUT);
