@@ -1,8 +1,9 @@
 #include "button_service.h"
 #include "interruption_hal.h"
 
+LOG_MODULE_REGISTER(button_service, LOG_LEVEL_INF);
+
 static struct button service_buttons[10];
-void button1_service_interrupt_handler(const struct device* dev, struct gpio_callback* cb, uint32_t pins);
 
 const static interruption_func_ptr callbacks[10] = {
     [BUTTON_ONE] = button1_service_interrupt_handler,
@@ -12,10 +13,10 @@ const static interruption_func_ptr callbacks[10] = {
 };
 
 void button_service_init(const struct button_callbacks* bcb) {
-    button_service_add_interruption(BUTTON_ONE, bcb->make_led_brighter);
-    button_service_add_interruption(BUTTON_TWO, bcb->make_led_darker);
-    button_service_add_interruption(BUTTON_THREE, bcb->make_led_blink_faster);
-    button_service_add_interruption(BUTTON_FOUR, bcb->make_led_blink_slower);
+    button_service_add_interruption(BUTTON_ONE, bcb->button1_callback);
+    button_service_add_interruption(BUTTON_TWO, bcb->button2_callback);
+    button_service_add_interruption(BUTTON_THREE, bcb->button3_callback);
+    button_service_add_interruption(BUTTON_FOUR, bcb->button4_callback);
 }
 
 void button_service_add_interruption(const int id, const button_callback callback)
@@ -27,20 +28,24 @@ void button_service_add_interruption(const int id, const button_callback callbac
 
 void button1_service_interrupt_handler(const struct device* dev, struct gpio_callback* cb, uint32_t pins)
 {
+    LOG_INF("Interrupt handler for button 1.");
     service_buttons[BUTTON_ONE].callback();
 }
 
 void button2_service_interrupt_handler(const struct device* dev, struct gpio_callback* cb, uint32_t pins)
 {
+    LOG_INF("Interrupt handler for button 2.");
     service_buttons[BUTTON_TWO].callback();
 }
 
 void button3_service_interrupt_handler(const struct device* dev, struct gpio_callback* cb, uint32_t pins)
 {
+    LOG_INF("Interrupt handler for button 3.");
     service_buttons[BUTTON_THREE].callback();
 }
 
 void button4_service_interrupt_handler(const struct device* dev, struct gpio_callback* cb, uint32_t pins)
 {
+    LOG_INF("Interrupt handler for button 4.");
     service_buttons[BUTTON_FOUR].callback();
 }

@@ -1,5 +1,5 @@
-#include "pwm_hal.h"
 #include <zephyr/logging/log.h>
+#include "pwm_hal.h"
 
 void pwm_service_init(void);
 void pwm_service_set_pulse(int);

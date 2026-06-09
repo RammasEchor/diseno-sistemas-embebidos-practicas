@@ -46,5 +46,5 @@ void pwm_service_decrement_period(int ms_dec) {
 
 void static pwm_service_set_config() {
     LOG_INF("duty cycle: %d %%", (static_pulse_ms * 100) / static_period_ms);
-    pwm_hal_set(PWM_CHANNEL_ZERO, static_period_ms, static_pulse_ms);
+    pwm_hal_set(PWM_CHANN_ZERO, static_period_ms, static_pulse_ms);
 }

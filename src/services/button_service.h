@@ -1,14 +1,13 @@
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/logging/log.h>
 
 typedef void (*button_callback) (void);
 
 struct button_callbacks {
-    button_callback check_power_button_pressed;
-    button_callback toggle_led_pressed;
-    button_callback make_led_brighter;
-    button_callback make_led_darker;
-    button_callback make_led_blink_slower;
-    button_callback make_led_blink_faster;
+    button_callback button1_callback;
+    button_callback button2_callback;
+    button_callback button3_callback;
+    button_callback button4_callback;
 };
 
 struct button {

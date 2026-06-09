@@ -3,6 +3,7 @@
 #include "interruption_hal.h"
 #include "buttons_hal.h"
 
+
 static struct gpio_callback callback_data[10];
 
 void hal_interruption_init() {}
